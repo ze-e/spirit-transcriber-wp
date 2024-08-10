@@ -3,15 +3,24 @@
 Plugin Name: Spirit Transcriber
 Description: A plugin to transcribe audio and video files using AssemblyAI.
 Version: 1.0
-Author: Your Name
+Author: Z Rex Rodriguez
 */
 
+// Load Composer's autoloader
 require 'vendor/autoload.php';
 
+use Dotenv\Dotenv;
 use FFMpeg\FFMpeg;
 use FFMpeg\Format\Audio\Mp3;
 
 defined('ABSPATH') or die('No script kiddies please!');
+
+// Load .env file
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+// Access the environment variables
+define('AAI_API_KEY', $_ENV['AAI_API_KEY']);
 
 function spirit_transcriber_enqueue_scripts() {
     wp_enqueue_style('spirit-transcriber-style', plugins_url('css/style.css', __FILE__));
